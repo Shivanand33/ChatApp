@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState,  useEffect } from "react";
  import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [theme, setTheme] = useState(false);
   const handleThemeChange = (event) => {
     setTheme(event.target.value);
-    localStorage.getItem("chatKaroTheme", event.target.value);
+    localStorage.getItem("jobportal", event.target.value);
     document.documentElement.setAttribute("data-theme", event.target.value);
   };
    useEffect(() => {
@@ -15,13 +15,21 @@ const Navbar = () => {
   }, []);
   return (
     <>
-      <div className="bg-primary flex justify-between items-center font-bold p-2">
+      <div className="bg-primary flex justify-between items-center min-w-screen font-bold p-2">
         <h1>ChatAp</h1>
         <div>
-          <span>Home</span>
-          <span>About</span>
+            <Link to="/" className='  text-lg
+        px-4 py-1
+        rounded-full
+        
+        
+        hover:text-orange-100
+        transition'>
+    Home
+     </Link>
         </div>
         <div className="flex gap-3">
+        
       <Link to="/login" className='  text-lg
         px-4 py-1
         rounded-full

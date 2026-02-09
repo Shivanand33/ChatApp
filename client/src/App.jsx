@@ -3,6 +3,7 @@ import Register from './pages/Register';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Login from './pages/Login';
 import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
 import { Toaster } from 'react-hot-toast';
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
      <Navbar />
      <Routes>
       {/* <Route path='/' element= {<Home/>} /> */}
+        <Route path='/' element={<Home/>}/>
       <Route path='/Register' element={<Register/>}/>
       <Route path='/Login'  element={<Login/>}/>
 
