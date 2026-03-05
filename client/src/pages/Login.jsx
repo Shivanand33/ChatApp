@@ -98,7 +98,7 @@ const Login = () => {
                   <input
                     type="email"
                     name="email"
-                    placeholder="name@company.com"
+                    placeholder="name@email.com"
                     value={formData.email}
                     onChange={handleChange}
                     disabled={Loading}

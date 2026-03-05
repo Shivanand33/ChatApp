@@ -105,7 +105,7 @@ const Register = () => {
                   <input
                     type="text"
                     name="fullName"
-                    placeholder="John Doe"
+                    placeholder="Enter Name"
                     value={formData.fullName}
                     onChange={handleChange}
                     disabled={isLoading}
@@ -129,7 +129,7 @@ const Register = () => {
                   <input
                     type="email"
                     name="email"
-                    placeholder="john@example.com"
+                    placeholder="name@gmail.com.com"
                     value={formData.email}
                     onChange={handleChange}
                     disabled={isLoading}
@@ -148,7 +148,7 @@ const Register = () => {
                   <input
                     type="tel"
                     name="mobileNumber"
-                    placeholder="9876543210"
+                    placeholder="91+"
                     maxLength="10"
                     value={formData.mobileNumber}
                     onChange={handleChange}
