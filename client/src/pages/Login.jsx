@@ -24,7 +24,7 @@ const Login = () => {
       toast.success(res.data.message);
       sessionStorage.setItem("AppUser", JSON.stringify(res.data.data));
       handleClearForm();
-      navigate("/dashboard");
+      navigate("/chating");
     } catch (error) {
       toast.error(error?.response?.data?.message || "Login failed");
     } finally {

@@ -1,69 +1,62 @@
-import React, { useState,  useEffect } from "react";
- import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
-  const [theme, setTheme] = useState(false);
+const NavBar = () => {
+  const [theme, setTheme] = useState("light");
+  const navigate = useNavigate();
+
   const handleThemeChange = (event) => {
-    setTheme(event.target.value);
-    localStorage.getItem("jobportal", event.target.value);
-    document.documentElement.setAttribute("data-theme", event.target.value);
+    const selectedTheme = event.target.value;
+    setTheme(selectedTheme);
+    localStorage.setItem("chit-chatTheme", selectedTheme);
+    document.documentElement.setAttribute("data-theme", selectedTheme);
   };
-   useEffect(() => {
-    const currentTheme = localStorage.getItem("chatKaroTheme");
-    document.documentElement.setAttribute("data-theme", currentTheme);
-    setTheme(currentTheme);
-  }, []);
-  return (
-    <>
-      <div className="bg-primary flex justify-between items-center min-w-screen font-bold p-2">
-        <h1>ChatAp</h1>
-        <div>
-            <Link to="/" className='  text-lg
-        px-4 py-1
-        rounded-full
-        
-        
-        hover:text-orange-100
-        transition'>
-    Home
-     </Link>
-        </div>
-        <div className="flex gap-3">
-        
-      <Link to="/login" className='  text-lg
-        px-4 py-1
-        rounded-full
-        shadow-lg
-        border
-        hover:bg-orange-100
-        transition'>
-    Login
-     </Link>
 
-    <Link
-      to="/register"
-      className="
-        text-lg
-        px-4 py-1
-        rounded-full
-        shadow-lg
-        border
-        hover:bg-orange-100
-        transition
-      "
-    >
-      Register
-    </Link>
-          {/* <button className="btn btn-secondary">Login</button> */}
-          <select
-            name="theme"
-            id="theme"
-            className="select"
-            onChange={handleThemeChange}
-             value={theme}
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("chit-chatTheme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    setTheme(savedTheme);
+  }, []);
+
+  return (
+    <nav className="bg-primary px-6 py-3 shadow-md">
+      <div className="flex items-center justify-between max-w-7xl mx-auto">
+        {/* Logo */}
+        <h1 className="text-2xl font-extrabold tracking-wide cursor-pointer">
+          ChatHuB
+        </h1>
+
+        {/* Links */}
+        <div className="hidden md:flex gap-6 text-sm font-medium">
+          <span className="cursor-pointer hover:text-secondary transition">
+            Home
+          </span>
+          <span className="cursor-pointer hover:text-secondary transition">
+            About
+          </span>
+        </div>
+
+        {/* Actions */}
+        <div className="flex items-center gap-3">
+          <button
+            className="btn-secondary1"
+            onClick={() => navigate("/login")}
           >
-         
-          <option value="">Default</option>
+            Login
+          </button>
+
+          <button
+            className="btn btn-outline btn-sm px-5"
+            onClick={() => navigate("/register")}
+          >
+            Register
+          </button>
+
+          <select
+            className="select select-bordered select-sm min-w-[130px]"
+            onChange={handleThemeChange}
+            value={theme}
+          >
             <option value="light">Light</option>
             <option value="dark">Dark</option>
             <option value="claude">Claude</option>
@@ -84,8 +77,8 @@ const Navbar = () => {
           </select>
         </div>
       </div>
-    </>
+    </nav>
   );
 };
 
-export default Navbar;
+export default NavBar;

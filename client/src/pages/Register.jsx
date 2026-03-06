@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import api from "../config/api";
-import { User, Mail, Phone, Lock, UserPlus, RotateCcw } from "lucide-react"; // Icons for better UI
+// import api from "../config/api";
+import api from "../config/api.jsx"
+import { User, Mail, Phone, Lock, UserPlus, RotateCcw } from "lucide-react";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -39,7 +40,11 @@ const Register = () => {
       Error.fullName = "Only alphabets and spaces allowed";
     }
 
-    if (!/^[\w\.]+@(gmail|outlook|ricr|yahoo)\.(com|in|co.in)$/.test(formData.email)) {
+    if (
+      !/^[\w\.]+@(gmail|outlook|ricr|yahoo)\.(com|in|co.in)$/.test(
+        formData.email,
+      )
+    ) {
       Error.email = "Use proper email format";
     }
 
@@ -89,12 +94,19 @@ const Register = () => {
               <div className="bg-primary/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <UserPlus className="text-primary w-8 h-8" />
               </div>
-              <h2 className="text-3xl font-bold text-base-content">Create Account</h2>
-              <p className="text-base-content/60 mt-2">Join us today! It only takes a minute. 🫡</p>
+              <h2 className="text-3xl font-bold text-base-content">
+                Create Account
+              </h2>
+              <p className="text-base-content/60 mt-2">
+                Join us today! It only takes a minute. 🫡
+              </p>
             </div>
 
-            <form onSubmit={handleSubmit} onReset={handleClearForm} className="space-y-5">
-              
+            <form
+              onSubmit={handleSubmit}
+              onReset={handleClearForm}
+              className="space-y-5"
+            >
               {/* Full Name */}
               <div className="form-control">
                 <label className="label py-1">
@@ -109,12 +121,14 @@ const Register = () => {
                     value={formData.fullName}
                     onChange={handleChange}
                     disabled={isLoading}
-                    className={`input input-bordered w-full pl-11 focus:border-primary transition-all ${validationError.fullName ? 'input-error' : ''}`}
+                    className={`input input-bordered w-full pl-11 focus:border-primary transition-all ${validationError.fullName ? "input-error" : ""}`}
                   />
                 </div>
                 {validationError.fullName && (
                   <label className="label h-6">
-                    <span className="label-text-alt text-error font-medium">{validationError.fullName}</span>
+                    <span className="label-text-alt text-error font-medium">
+                      {validationError.fullName}
+                    </span>
                   </label>
                 )}
               </div>
@@ -133,7 +147,7 @@ const Register = () => {
                     value={formData.email}
                     onChange={handleChange}
                     disabled={isLoading}
-                    className={`input input-bordered w-full pl-11 focus:border-primary transition-all ${validationError.email ? 'input-error' : ''}`}
+                    className={`input input-bordered w-full pl-11 focus:border-primary transition-all ${validationError.email ? "input-error" : ""}`}
                   />
                 </div>
               </div>
@@ -146,7 +160,7 @@ const Register = () => {
                 <div className="relative">
                   <Phone className="absolute left-3 top-3.5 h-5 w-5 text-base-content/40" />
                   <input
-                    type="tel"
+                    type="number"
                     name="mobileNumber"
                     placeholder="91+"
                     maxLength="10"
@@ -191,13 +205,15 @@ const Register = () => {
                       value={formData.confirmPassword}
                       onChange={handleChange}
                       disabled={isLoading}
-                      className={`input input-bordered w-full pl-11 focus:border-primary transition-all ${validationError.confirmPassword ? 'input-error' : ''}`}
+                      className={`input input-bordered w-full pl-11 focus:border-primary transition-all ${validationError.confirmPassword ? "input-error" : ""}`}
                     />
                   </div>
                 </div>
               </div>
               {validationError.confirmPassword && (
-                <p className="text-error text-xs font-medium pl-1">{validationError.confirmPassword}</p>
+                <p className="text-error text-xs font-medium pl-1">
+                  {validationError.confirmPassword}
+                </p>
               )}
 
               {/* Buttons */}
@@ -219,9 +235,7 @@ const Register = () => {
                   {isLoading ? (
                     <span className="loading loading-spinner"></span>
                   ) : (
-                    <>
-                      Create Account
-                    </>
+                    <>Create Account</>
                   )}
                 </button>
               </div>
