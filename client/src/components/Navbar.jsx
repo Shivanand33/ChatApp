@@ -25,8 +25,7 @@ const NavBar = () => {
         <h1 className="text-2xl font-extrabold tracking-wide cursor-pointer">
           ChatHuB
         </h1>
-
-        {/* Links */}
+ 
         <div className="hidden md:flex gap-6 text-sm font-medium">
           <span className="cursor-pointer hover:text-secondary transition">
             Home
