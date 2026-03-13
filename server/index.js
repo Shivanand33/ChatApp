@@ -4,7 +4,11 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectDB from "./src/config/db.js";
 import AuthRouter from "./src/routers/authRouter.js";
+import UserRouter from "./src/routers/userRouter.js";
 import morgan from "morgan";
+import http from "http";
+import { Server } from "socket.io";
+import WebSocket from "./src/config/websocket.js";
 
 dotenv.config();
 
@@ -13,7 +17,7 @@ const app = express();
 // Middlewares
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173","https://chatapp.dropsofchange.in"],
     credentials: true,
   }),
 );
@@ -25,6 +29,7 @@ app.use(morgan("dev"));
 
 // Routes
 app.use("/auth", AuthRouter);
+app.use("/user", UserRouter);
 
 // Health check (optional but recommended)
 app.get("/", (req, res) => {
@@ -47,16 +52,19 @@ app.use((err, req, res, next) => {
 // Start server ONLY after DB connects
 const PORT = process.env.PORT || 5000;
 
-const startServer = async () => {
-  try {
-    await connectDB();
-    app.listen(PORT, () => {
-      console.log(`✅ Server running on port ${PORT}`);
-    });
-  } catch (error) {
-    console.error("❌ Failed to connect DB", error.message);
-    process.exit(1);
-  }
-};
+const httpServer = http.createServer(app);
 
-startServer();
+const io = new Server(httpServer, {
+  cors: {
+    origin: ["http://localhost:5173","https://chatapp.dropsofchange.in"],
+    credentials: true,
+    methods: ["GET", "POST"],
+  },
+});
+
+WebSocket(io);
+
+httpServer.listen(PORT, async () => {
+  await connectDB();
+  console.log("🔗 Server Started at : ", PORT);
+});
