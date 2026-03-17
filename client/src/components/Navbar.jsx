@@ -26,7 +26,7 @@ const NavBar = () => {
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         {/* Logo */}
         <h1 className="text-2xl font-extrabold tracking-wide cursor-pointer">
-          Data-Transfer
+          Chat-Hub
         </h1>
 
         {/* Links */}
